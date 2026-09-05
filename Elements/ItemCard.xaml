@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="demo1.Elements.ItemCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:demo1.Elements"
+             mc:Ignorable="d" FontFamily="Times New Roman"
+             d:DesignHeight="100" d:DesignWidth="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.1*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="/totosha.png" Stretch="Uniform" />
+            <!--"{Binding PhotoPath, TargetNullValue='totosha.png'}"/>-->
+
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding Category.Name}"/>
+                    <Label Content=" | "/>
+                    <Label Content="{Binding Name}"/>
+                </StackPanel>
+                <TextBlock Text="{Binding Description}"/>
+                <Label Content="{Binding Manufacturer.Name}"/>
+                <Label Content="{Binding Provider.Name}"/>
+                <Label Content="{Binding Price}"/>
+                <Label Content="{Binding Unit}"/>
+                <Label Content="{Binding Count}"/>
+            </StackPanel>
+            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Content="{Binding CurrentDiscount}" Grid.Column="2"/>
+    </Grid>
+</UserControl>
