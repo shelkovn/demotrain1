@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
+using demo1.Windows.AdminWindow;
+using demo1.Windows.ManagerWindow;
+using demo1.Windows.UserWindow;
 
 namespace demo1
 {
@@ -48,9 +51,30 @@ namespace demo1
                         MessageBox.Show("Отсутствует роль пользователя");
                         return;
                     }
-                    var window = new BrowsingWindow(user);
-                    window.Show();
-                    this.Close();
+                    else
+                    {
+                        switch (user.RoleId)
+                        {
+                            case 1:
+                                var admWindow = new AdminWindow(user);
+                                admWindow.Show();
+                                this.Close();
+                                break;
+                            case 2:
+                                var mngWindow = new ManagerWindow(user);
+                                mngWindow.Show();
+                                this.Close();
+                                break;
+                            case 3:
+                                var usrWindow = new UserWindow(user);
+                                usrWindow.Show();
+                                this.Close();
+                                break;
+                            default:
+                                MessageBox.Show($"Неизвестная роль пользователя {user.Login}");
+                                break;
+                        }
+                    }
                 }
             }
             else

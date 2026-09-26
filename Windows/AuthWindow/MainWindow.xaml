@@ -16,7 +16,7 @@
             <Label Content="Пароль" />
             <PasswordBox x:Name="PasswordBox"/>
             <Button x:Name="AuthButton" Content="Войти" Margin="5" Background="#00fa9a" Click="AuthClick"/>
-            <Button x:Name="GuestButton" Content="Смотреть как гость" Margin="5" Background="#7FFF00" Click="GuestClick"/>
+            <!--<Button x:Name="GuestButton" Content="Смотреть как гость" Margin="5" Background="#7FFF00" Click="GuestClick"/>-->
         </StackPanel>
     </Grid>
 </Window>

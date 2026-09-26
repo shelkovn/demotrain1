@@ -1,0 +1,30 @@
+﻿<Window x:Class="demo1.Windows.UserWindow.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo1.Windows.UserWindow"
+        xmlns:elements="clr-namespace:demo1.Elements"
+        mc:Ignorable="d"
+        Title="UserWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button x:Name="ToAuth" Content="НЕ ОСОБО КРУТОЕ ОКНО ДЛЯ ПОЛЬЗОВАТЕЛЯ И ОНО ОЧЕНЬ ОТЛИЧАЕТСЯ ОТ ДРУГИХ ОКОН И ОЧЕНЬ ОТДЕЛЬНОЕ выйти" Click="ToAuth_Click" HorizontalAlignment="Left" Margin="5" Background="#00fa9a"/>
+        <Label x:Name="UsernameLabel" HorizontalAlignment="Right"/>
+
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl x:Name="ProductList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <elements:ItemCard/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>
