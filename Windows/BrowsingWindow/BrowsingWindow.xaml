@@ -11,13 +11,17 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <Button x:Name="ToAuth" Content="Выйти" Click="ToAuth_Click" Width="100" HorizontalAlignment="Left" Margin="5" Background="#00fa9a"/>
         <Label x:Name="UsernameLabel" HorizontalAlignment="Right"/>
 
-        <ScrollViewer Grid.Row="1">
+        <Label Content="Поиск" Grid.Row="1"/>
+        <TextBox x:Name="SearchBar" Width="400" Grid.Row="1" TextChanged="SearchBar_TextChanged"/>
+
+        <ScrollViewer Grid.Row="2">
             <ItemsControl x:Name="ProductList">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

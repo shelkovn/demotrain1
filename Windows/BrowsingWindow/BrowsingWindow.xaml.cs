@@ -1,5 +1,6 @@
 ﻿using demo1.DB;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -56,7 +57,26 @@ namespace demo1.Windows.BrowsingWindow
 
         private void ItemsFilter(object sender, FilterEventArgs e)
         {
-            e.Accepted = true;
+            if (SearchBar.Text.IsNullOrEmpty())
+            {
+                e.Accepted = true;
+            }
+            else
+            {
+                if (e.Item is Product p)
+                {
+                    bool nameHit = p.Name?.Contains(SearchBar.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+                    bool articleHit = p.Article?.Contains(SearchBar.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+                    bool unitHit = p.Unit?.Contains(SearchBar.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+                    bool descriptionHit = p.Description?.Contains(SearchBar.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+
+                    bool manufacturerHit = p.Manufacturer?.Name?.Contains(SearchBar.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+                    bool providerHit = p.Provider?.Name?.Contains(SearchBar.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+                    bool categoryHit = p.Category?.Name?.Contains(SearchBar.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+
+                    e.Accepted = nameHit || articleHit || unitHit || descriptionHit || manufacturerHit || providerHit || categoryHit;
+                }
+            }
         }
 
         private void ToAuth_Click(object sender, RoutedEventArgs e)
@@ -64,6 +84,11 @@ namespace demo1.Windows.BrowsingWindow
             var window = new MainWindow();
             window.Show();
             this.Close();
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            productsSource.View.Refresh();
         }
     }
 }
