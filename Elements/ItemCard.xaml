@@ -5,29 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:demo1.Elements"
              mc:Ignorable="d" FontFamily="Times New Roman"
-             d:DesignHeight="100" d:DesignWidth="500">
-    <Grid>
+             d:DesignHeight="100" d:DesignWidth="450"
+             DataContextChanged="UserControl_DataContextChanged">
+    <Grid Width="450" Height="100" x:Name="ProductGrid" Margin="15">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition Width="0.2*"/>
-            <ColumnDefinition Width="0.7*"/>
             <ColumnDefinition Width="0.1*"/>
         </Grid.ColumnDefinitions>
         <Image Source="/totosha.png" Stretch="Uniform" />
             <!--"{Binding PhotoPath, TargetNullValue='totosha.png'}"/>-->
-
-            <StackPanel Orientation="Vertical" Grid.Column="1">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="{Binding Category.Name}"/>
-                    <Label Content=" | "/>
-                    <Label Content="{Binding Name}"/>
-                </StackPanel>
-                <TextBlock Text="{Binding Description}"/>
-                <Label Content="{Binding Manufacturer.Name}"/>
-                <Label Content="{Binding Provider.Name}"/>
-                <Label Content="{Binding Price}"/>
-                <Label Content="{Binding Unit}"/>
-                <Label Content="{Binding Count}"/>
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding Category.Name}"/>
+                <Label Content=" | "/>
+                <Label Content="{Binding Name}"/>
             </StackPanel>
-            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Content="{Binding CurrentDiscount}" Grid.Column="2"/>
+            <TextBlock x:Name="DescriptionText" Text="{Binding Description}"/>
+            <Label x:Name="ManufacturerLabel" Content="{Binding Manufacturer.Name}"/>
+            <Label x:Name="ProviderLabel" Content="{Binding Provider.Name}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="OldPriceText" Foreground="Red" TextDecorations="Strikethrough"/>
+                <TextBlock x:Name="PriceText"/>
+            </StackPanel>
+            <Label x:Name="UnitLabel" Content="{Binding Unit}"/>
+                <Label x:Name="AmountLabel" Content="{Binding Count}"/>
+            </StackPanel>
+            <Label x:Name="DiscountLabel" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Content="{Binding CurrentDiscount}" Grid.Column="2"/>
     </Grid>
 </UserControl>
