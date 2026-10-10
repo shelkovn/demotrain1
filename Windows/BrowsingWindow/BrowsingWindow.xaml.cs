@@ -25,6 +25,7 @@ namespace demo1.Windows.BrowsingWindow
         private CollectionViewSource productsSource;
         private int? _userRoleId;
         private User _currentUser;
+        public Product? _selectedProduct;
         public BrowsingWindow(User? currentUser = null)
         {
             InitializeComponent();
@@ -89,6 +90,22 @@ namespace demo1.Windows.BrowsingWindow
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             productsSource.View.Refresh();
+        }
+
+        private void ProductList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _selectedProduct = ProductList.SelectedItem as Product;
+            SelectedLabel.Text = $"{_selectedProduct?.Name} {_selectedProduct?.Manufacturer.Name}" ?? "Товар не выбран";
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

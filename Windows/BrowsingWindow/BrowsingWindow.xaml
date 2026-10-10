@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -21,16 +22,21 @@
         <Label Content="Поиск" Grid.Row="1"/>
         <TextBox x:Name="SearchBar" Width="400" Grid.Row="1" TextChanged="SearchBar_TextChanged"/>
 
-        <ScrollViewer Grid.Row="2">
-            <ItemsControl x:Name="ProductList">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <elements:ItemCard/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            
-            </ItemsControl>
-        </ScrollViewer>
+        <TextBlock x:Name="SelectedLabel" Text="Выберите товар"  Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" >
+            <Button x:Name="DeleteButton" Content="Удалить" Click="DeleteButton_Click" Width="50"  Margin="5"/>
+            <Button x:Name="EditButton" Content="Редактировать" Click="EditButton_Click" Grid.Row="2" Width="80"  Margin="5"/>
+            <Button x:Name="AddButton" Content="Добавить товар" Click="AddButton_Click" Grid.Row="2" Width="100"  Margin="5"/>
+        </StackPanel>
+
+        <ListView x:Name="ProductList" SelectionChanged="ProductList_SelectionChanged" Grid.Row="3">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <elements:ItemCard/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
     </Grid>
     
 </Window>
