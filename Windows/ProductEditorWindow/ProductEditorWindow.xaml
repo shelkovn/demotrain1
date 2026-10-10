@@ -20,9 +20,12 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
+        <Label x:Name="ArticleLabel" Content="ID товара (Артикул):" Grid.Row="8" Grid.Column="0"/>
+        <TextBox x:Name="ArticleTextBox" Text="{Binding Article}" Grid.Row="8" Grid.Column="1" IsReadOnly="True"/>
+        
         <Label Content="Наименование товара:" Grid.Row="0" Grid.Column="0"/>
         <TextBox x:Name="NameTextBox" Text="{Binding Name}" Grid.Row="0" Grid.Column="1"/>
 
@@ -57,8 +60,8 @@
         <Label Content="Действующая скидка (%):" Grid.Row="7" Grid.Column="0"/>
         <TextBox x:Name="DiscountTextBox" Text="{Binding CurrentDiscount}" Grid.Row="7" Grid.Column="1"/>
 
-        <Button Grid.Row="8" x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click" Width="100" Height="30" Margin="0,0,10,0" IsDefault="True"/>
+        <Button Grid.Row="9" x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click" Width="100" Height="30" Margin="0,0,10,0" IsDefault="True"/>
         
-        <Button Grid.Row="8" Grid.Column="1" x:Name="CancelButton" Content="Отменить" Click="CancelButton_Click" Width="100" Height="30"/>
+        <Button Grid.Row="9" Grid.Column="1" x:Name="CancelButton" Content="Отменить" Click="CancelButton_Click" Width="100" Height="30"/>
     </Grid>
 </Window>
