@@ -24,8 +24,6 @@
 
         <TextBlock x:Name="SelectedLabel" Text="Выберите товар"  Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2" >
-            <Button x:Name="DeleteButton" Content="Удалить" Click="DeleteButton_Click" Width="50"  Margin="5"/>
-            <Button x:Name="EditButton" Content="Редактировать" Click="EditButton_Click" Grid.Row="2" Width="80"  Margin="5"/>
             <Button x:Name="AddButton" Content="Добавить товар" Click="AddButton_Click" Grid.Row="2" Width="100"  Margin="5"/>
         </StackPanel>
 

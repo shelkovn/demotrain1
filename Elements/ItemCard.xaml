@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:demo1.Elements"
              mc:Ignorable="d" FontFamily="Times New Roman"
-             d:DesignHeight="150" d:DesignWidth="450"
+             d:DesignHeight="200" d:DesignWidth="450"
              DataContextChanged="UserControl_DataContextChanged">
-    <Grid Width="450" Height="150" x:Name="ProductGrid" Margin="15">
+    <Grid Width="450" Height="200" x:Name="ProductGrid" Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition Width="0.2*"/>
@@ -29,8 +29,11 @@
                 <TextBlock x:Name="PriceText"/>
             </StackPanel>
             <Label x:Name="UnitLabel" Content="{Binding Unit}"/>
-                <Label x:Name="AmountLabel" Content="{Binding Count}"/>
-            </StackPanel>
-            <Label x:Name="DiscountLabel" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Content="{Binding CurrentDiscount}" Grid.Column="2"/>
+            <Label x:Name="AmountLabel" Content="{Binding Count}"/>
+
+            <Button x:Name="DeleteButton" Content="Удалить" Click="DeleteButton_Click" Width="50"  Margin="2"/>
+            <Button x:Name="EditButton" Content="Редактировать" Click="EditButton_Click" Width="80"  Margin="2"/>
+        </StackPanel>
+        <Label x:Name="DiscountLabel" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Content="{Binding CurrentDiscount}" Grid.Column="2"/>
     </Grid>
 </UserControl>

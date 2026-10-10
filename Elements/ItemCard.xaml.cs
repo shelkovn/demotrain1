@@ -1,4 +1,6 @@
 ﻿using demo1.DB;
+using demo1.Windows.BrowsingWindow;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -53,6 +55,40 @@ namespace demo1.Elements
                     PriceText.Text = $"Цена: {p.Price}";
                 }
             }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is Product p && Window.GetWindow(this) is BrowsingWindow window)
+            {
+                var result = MessageBox.Show($"Вы уверены, что хотите удалить {p.Name}?",
+                                     "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    using (var _context = new AppDbContext())
+                    {
+                        bool isInOrders = _context.OrderProducts.Any(op => op.Article == p.Article);
+
+                        if (isInOrders)
+                        {
+                            MessageBox.Show("Запрещено удалять товар, так как он присутствует в заказах!");
+                            return;
+                        }
+                        var product = _context.Products.Find(p.Article);
+                        if (product != null)
+                        {
+                            _context.Products.Remove(product);
+                            _context.SaveChanges();
+                            window.RefreshData();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

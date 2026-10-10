@@ -56,6 +56,35 @@ namespace demo1.Windows.BrowsingWindow
             ProductList.ItemsSource = productsSource.View;
         }
 
+        public void RefreshData()
+        {
+            Products.Clear();
+
+            using (var context = new AppDbContext())
+            {
+                var items = context.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.Manufacturer)
+                    .Include(p => p.Provider);
+
+                foreach (var item in items)
+                {
+                    Products.Add(item);
+                }
+            }
+
+            if (ProductList.ItemsSource == null)
+            {
+                productsSource = new() { Source = Products };
+                productsSource.Filter += ItemsFilter;
+                ProductList.ItemsSource = productsSource.View;
+            }
+            else
+            {
+                productsSource.View.Refresh();
+            }
+        }
+
         private void ItemsFilter(object sender, FilterEventArgs e)
         {
             if (SearchBar.Text.IsNullOrEmpty())
@@ -96,16 +125,12 @@ namespace demo1.Windows.BrowsingWindow
         {
             _selectedProduct = ProductList.SelectedItem as Product;
             SelectedLabel.Text = $"{_selectedProduct?.Name} {_selectedProduct?.Manufacturer.Name}" ?? "Товар не выбран";
-        }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        }
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
