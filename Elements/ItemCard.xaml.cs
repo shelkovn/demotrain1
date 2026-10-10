@@ -1,5 +1,6 @@
 ﻿using demo1.DB;
 using demo1.Windows.BrowsingWindow;
+using demo1.Windows.ProductEditorWindow;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -88,7 +89,12 @@ namespace demo1.Elements
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ProductEditorWindow window = new ProductEditorWindow();
+            window.Activate();
+            if (Window.GetWindow(this) is BrowsingWindow w)
+            {
+                w.Close();
+            }
         }
     }
 }

@@ -1,0 +1,64 @@
+﻿<Window x:Class="demo1.Windows.ProductEditorWindow.ProductEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo1.Windows"
+        mc:Ignorable="d"
+        Title="ContactEditorWindow" Height="450" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Наименование товара:" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="NameTextBox" Text="{Binding Name}" Grid.Row="0" Grid.Column="1"/>
+
+        <Label Content="Категория товара:" Grid.Row="1" Grid.Column="0"/>
+        <ComboBox x:Name="CategoryComboBox" Grid.Row="1" Grid.Column="1"
+              DisplayMemberPath="Name" 
+              SelectedValuePath="Id"
+              SelectedValue="{Binding CategoryId}"/>
+
+        <Label Content="Описание товара:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Margin="0,8,10,5"/>
+        <TextBox x:Name="DescriptionTextBox" Text="{Binding Description}" Grid.Row="2" Grid.Column="1"
+             Height="60" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Stretch"/>
+
+        <Label Content="Производитель:" Grid.Row="3" Grid.Column="0"/>
+        <ComboBox x:Name="ManufacturerComboBox" Grid.Row="3" Grid.Column="1"
+              DisplayMemberPath="Name" 
+              SelectedValuePath="Id"
+              SelectedValue="{Binding ManufacturerId}"/>
+
+        <Label Content="Поставщик:" Grid.Row="4" Grid.Column="0"/>
+        <ComboBox x:Name="ProviderComboBox" Grid.Row="4" Grid.Column="1"
+              DisplayMemberPath="Name" 
+              SelectedValuePath="Id"
+              SelectedValue="{Binding ProviderId}"/>
+
+        <Label Content="Цена:" Grid.Row="5" Grid.Column="0"/>
+        <TextBox x:Name="PriceTextBox" Text="{Binding Price}" Grid.Row="5" Grid.Column="1"/>
+
+        <Label Content="Количество на складе:" Grid.Row="6" Grid.Column="0"/>
+        <TextBox x:Name="CountTextBox" Text="{Binding Count}" Grid.Row="6" Grid.Column="1"/>
+
+        <Label Content="Действующая скидка (%):" Grid.Row="7" Grid.Column="0"/>
+        <TextBox x:Name="DiscountTextBox" Text="{Binding CurrentDiscount}" Grid.Row="7" Grid.Column="1"/>
+
+        <Button Grid.Row="8" x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click" Width="100" Height="30" Margin="0,0,10,0" IsDefault="True"/>
+        
+        <Button Grid.Row="8" Grid.Column="1" x:Name="CancelButton" Content="Отменить" Click="CancelButton_Click" Width="100" Height="30"/>
+    </Grid>
+</Window>

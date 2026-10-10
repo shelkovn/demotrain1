@@ -129,7 +129,9 @@ namespace demo1.Windows.BrowsingWindow
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ProductEditorWindow.ProductEditorWindow window = new ProductEditorWindow.ProductEditorWindow();
+            window.Activate();
+            this.Close();
         }
 
     }
