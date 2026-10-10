@@ -79,9 +79,8 @@ namespace demo1.Windows.ProductEditorWindow
 
                     context.SaveChanges();
                 }
-                this.DialogResult = true;
                 BrowsingWindow.BrowsingWindow window = new BrowsingWindow.BrowsingWindow();
-                window.Activate();
+                window.Show();
                 this.Close();
             }
             catch (Exception ex)
@@ -92,7 +91,6 @@ namespace demo1.Windows.ProductEditorWindow
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
             BrowsingWindow.BrowsingWindow window = new BrowsingWindow.BrowsingWindow();
             window.Activate();
             this.Close();

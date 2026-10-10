@@ -89,11 +89,15 @@ namespace demo1.Elements
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            ProductEditorWindow window = new ProductEditorWindow();
-            window.Activate();
-            if (Window.GetWindow(this) is BrowsingWindow w)
+            if (DataContext is Product p)
             {
-                w.Close();
+                ProductEditorWindow window = new ProductEditorWindow(p);
+                window.Show();
+                if (Window.GetWindow(this) is BrowsingWindow w)
+                {
+                    w.Close();
+                }
+
             }
         }
     }
