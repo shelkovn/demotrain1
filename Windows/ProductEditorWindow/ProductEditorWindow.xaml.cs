@@ -69,7 +69,7 @@ namespace demo1.Windows.ProductEditorWindow
                 return;
             }
 
-            if (!decimal.TryParse(PriceTextBox.Text.Replace(".", ","), out decimal parsedPrice) || parsedPrice < 0)
+            if (!decimal.TryParse(PriceTextBox.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture, out decimal parsedPrice) || parsedPrice < 0)
             {
                 MessageBox.Show("Стоимость должна быть неотрицательным целым или дробным числом!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -98,7 +98,7 @@ namespace demo1.Windows.ProductEditorWindow
             {
                 using (var context = new AppDbContext())
                 {
-                    _product.Price = (int)parsedPrice;  //TODO float migration
+                    _product.Price = (float)parsedPrice;
                     _product.Count = count;
                     _product.CurrentDiscount = discount;
                     _product.Unit = "шт.";

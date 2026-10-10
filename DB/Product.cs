@@ -11,7 +11,7 @@ public partial class Product
 
     public string Unit { get; set; } = null!;
 
-    public int Price { get; set; }
+    public float Price { get; set; }
 
     public int ProviderId { get; set; }
 

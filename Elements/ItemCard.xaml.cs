@@ -49,7 +49,7 @@ namespace demo1.Elements
                 if (p.CurrentDiscount != 0)
                 {
                     OldPriceText.Text = $"Цена: {p.Price}";
-                    PriceText.Text = $" {p.Price - p.Price*p.CurrentDiscount*0.01}";
+                    PriceText.Text = $" {p.Price - p.Price*p.CurrentDiscount* 0.01f:F2}";
                 }
                 else
                 {
