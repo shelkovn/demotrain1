@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:velosipedi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Авторизация" Height="450" Width="800">
     <Grid>
+        <StackPanel Orientation="Vertical" MaxWidth="200" VerticalAlignment="Center">
+            <Label Margin="5">Логин</Label>
+            <TextBox Margin="5" x:Name="LoginBox"/>
 
+            <Label Margin="5">Пароль</Label>
+            <PasswordBox Margin="5" x:Name="PasswordBox"/>
+
+            <Button Margin="5" x:Name="AuthButton" Click="AuthButton_Click"> Войти</Button>
+
+            <Button Margin="5" x:Name="GuestButton" Click="GuestButton_Click"> Смотреть как гость</Button>
+        </StackPanel>
     </Grid>
 </Window>

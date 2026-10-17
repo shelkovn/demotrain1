@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="velosipedi.Elements.ItemCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:velosipedi.Elements"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="600"
+             DataContextChanged="UserControl_DataContextChanged">
+    <Grid x:Name="ProductGrid" Width="600" Height="200">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="ItemImage" Stretch="Uniform" Source="{Binding ImagePath}"/>
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding Category.CategoryName}"/>
+                <Label Content=" | "/>
+                <Label Content="{Binding ItemName}"/>
+            </StackPanel>
+            <TextBlock x:Name="DescriptionText" Text="{Binding Description}"/>
+            <Label x:Name="ManufacturerLabel" Content="{Binding Manufacturer.Name}"/>
+            <Label x:Name="ProviderLabel" Content="{Binding Provider.Name}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="OldPriceText" Foreground="Red" TextDecorations="Strikethrough"/>
+                <TextBlock x:Name="PriceText"/>
+            </StackPanel>
+            <Label x:Name="UnitLabel" Content="{Binding Unit}"/>
+            <Label x:Name="AmountLabel" Content="{Binding Count}"/>
+        </StackPanel>
+        <Label x:Name="DiscountLabel" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Content="{Binding CurrentDiscount}" Grid.Column="2"/>
+    </Grid>
+</UserControl>
