@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:velosipedi"
         xmlns:elem="clr-namespace:velosipedi.Elements"
         mc:Ignorable="d"
-        Title="BrowsingWindow" Height="450" Width="800">
+        Title="Просмотр товаров" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -43,7 +43,14 @@
             </ComboBox>
         </StackPanel>
 
-        <ListView x:Name="ItemList" Grid.Row="2">
+        <StackPanel x:Name="EditorPanel" Grid.Row="1" Orientation="Horizontal">
+            <Label x:Name="SelectionLabel" Content="Не выбрано" MinWidth="200"/>
+            <Button x:Name="EditButton" Content="Редактировать" Click="EditButton_Click"/>
+            <Button x:Name="DeleteButton" Content="Удалить" Click="DeleteButton_Click"/>
+            <Button x:Name="AddButton" Content="Добавить товар" Margin="50,0,0,0" Click="AddButton_Click"/>
+        </StackPanel>
+
+        <ListView x:Name="ItemList" Grid.Row="2" SelectionChanged="ItemList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <elem:ItemCard/>

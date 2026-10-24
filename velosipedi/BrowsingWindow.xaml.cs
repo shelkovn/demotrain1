@@ -27,6 +27,9 @@ namespace velosipedi
         public ObservableCollection<Item> Items = [];
         private CollectionViewSource _itemSource;
         private User? _user;
+
+        private Item? _selectedItem;
+
         public BrowsingWindow(User? user)
         {
             InitializeComponent();
@@ -120,9 +123,9 @@ namespace velosipedi
             if (amountind != -1 && amountind != 0)
                 _itemSource.SortDescriptions.Add(new SortDescription("AmountInStock", amountind == 1 ? ListSortDirection.Ascending : ListSortDirection.Descending));
             if (priceind != -1 && priceind != 0)
-                _itemSource.SortDescriptions.Add(new SortDescription("Price", amountind == 1 ? ListSortDirection.Ascending : ListSortDirection.Descending));
+                _itemSource.SortDescriptions.Add(new SortDescription("Price", priceind == 1 ? ListSortDirection.Ascending : ListSortDirection.Descending));
             if (discountind != -1 && discountind != 0)
-                _itemSource.SortDescriptions.Add(new SortDescription("CurrentDiscount", amountind == 1 ? ListSortDirection.Ascending : ListSortDirection.Descending));
+                _itemSource.SortDescriptions.Add(new SortDescription("CurrentDiscount", discountind == 1 ? ListSortDirection.Ascending : ListSortDirection.Descending));
 
             _itemSource.View.Refresh();
         }
@@ -161,6 +164,61 @@ namespace velosipedi
         {
             if (_itemSource != null)
                 _itemSource.View.Refresh();
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedItem == null)
+            {
+                MessageBox.Show("Не выбран товар", "Выберите товар", MessageBoxButton.OK, icon: MessageBoxImage.Warning);
+            }
+            else
+            {
+                var result = MessageBox.Show($"Удалить товар {_selectedItem.ItemName}?", "Подтвердите действие", MessageBoxButton.YesNo, icon: MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes) 
+                {
+                    try
+                    {
+                        using (var context = new ShelkovnDeLab5Context())
+                        {
+                            bool isInOrders = context.OrderItems.Any(op => op.ItemId == _selectedItem.ItemId);
+
+                            if (isInOrders)
+                            {
+                                MessageBox.Show("Запрещено удалять товар, так как он присутствует в заказах!");
+                                return;
+                            }
+                            var product = context.Items.Find(_selectedItem.ItemId);
+                            if (product != null)
+                            {
+                                context.Items.Remove(product);
+                                context.SaveChanges();
+                                RefreshList();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка: {ex.Message}");
+                    }
+                }
+            }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _selectedItem = e.AddedItems?[0] as Item ?? null;
+            SelectionLabel.Content = _selectedItem?.Category.CategoryName ?? "Не выбрано";
         }
     }
 }

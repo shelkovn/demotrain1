@@ -5,6 +5,9 @@
     <Compile Update="BrowsingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="EditorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Elements\ItemCard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
