@@ -15,6 +15,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+
+	  <None Remove="**\*.png;**\*.jpg;**\*.jpeg;**\*.gif;**\*.bmp;**\*.ico" />
+	  <Content Remove="**\*.png;**\*.jpg;**\*.jpeg;**\*.gif;**\*.bmp;**\*.ico" />
+	  
+	  <Resource Include="**\*.png;**\*.jpg;**\*.jpeg;**\*.gif;**\*.bmp;**\*.ico" />
   </ItemGroup>
 
 </Project>

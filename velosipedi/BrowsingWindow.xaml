@@ -9,11 +9,41 @@
         Title="BrowsingWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="ItemList" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" x:Name="SearchbarPanel">
+            <Label Content="Поиск"/>
+            <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged" MinWidth="100"/>
+            <ComboBox x:Name="AmountSort" SelectionChanged="AmountSort_SelectionChanged" SelectedIndex="0">
+                <TextBlock>Не сортировать по наличию</TextBlock>
+                <TextBlock>По возрастанию количества</TextBlock>
+                <TextBlock>По убыванию количества</TextBlock>
+            </ComboBox>
+
+            <ComboBox x:Name="PriceSort" SelectionChanged="PriceSort_SelectionChanged" SelectedIndex="0">
+                <TextBlock>Не сортировать по цене</TextBlock>
+                <TextBlock>По возрастанию цены</TextBlock>
+                <TextBlock>По убыванию цены</TextBlock>
+            </ComboBox>
+
+            <ComboBox x:Name="DiscountSort" SelectionChanged="DiscountSort_SelectionChanged" SelectedIndex="0">
+                <TextBlock>Не сортировать по скидке</TextBlock>
+                <TextBlock>По возрастанию скидки</TextBlock>
+                <TextBlock>По убыванию скидки</TextBlock>
+            </ComboBox>
+
+            <ComboBox x:Name="DiscountRange" SelectionChanged="DiscountRange_SelectionChanged" SelectedIndex="0">
+                <TextBlock>Все диапазоны</TextBlock>
+                <TextBlock>0-11.99%</TextBlock>
+                <TextBlock>12-18.99%</TextBlock>
+                <TextBlock>19-100%</TextBlock>
+            </ComboBox>
+        </StackPanel>
+
+        <ListView x:Name="ItemList" Grid.Row="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <elem:ItemCard/>

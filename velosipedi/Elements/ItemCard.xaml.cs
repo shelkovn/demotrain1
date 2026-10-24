@@ -53,6 +53,22 @@ namespace velosipedi.Elements
                     PriceText.Text = $"Цена: {p.Price}";
                 }
 
+                if (!string.IsNullOrEmpty(p.ImagePath))
+                {
+                    try
+                    {
+                        ItemImage.Source = new BitmapImage(new Uri($"/Pictures/{p.ImagePath}", UriKind.RelativeOrAbsolute));
+                    }
+                    catch
+                    {
+                        ItemImage.Source = new BitmapImage(new Uri("/Pictures/picture.png", UriKind.Relative));
+                    }
+                }
+                else
+                {
+                    ItemImage.Source = new BitmapImage(new Uri("/Pictures/picture.png", UriKind.Relative));
+                }
+
             }
         }
     }
