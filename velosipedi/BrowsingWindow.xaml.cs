@@ -168,7 +168,16 @@ namespace velosipedi
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_selectedItem == null)
+            {
+                MessageBox.Show("Не выбран товар", "Выберите товар", MessageBoxButton.OK, icon: MessageBoxImage.Warning);
+            }
+            else
+            {
+                EditorWindow window = new EditorWindow(_selectedItem);
+                window.Show();
+                this.Close();
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

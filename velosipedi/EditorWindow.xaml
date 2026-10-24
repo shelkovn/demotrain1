@@ -33,7 +33,7 @@
         <TextBox x:Name="ArticleTextBox" Text="{Binding Article}" Grid.Row="8" Grid.Column="1"/>
 
         <Label Content="Наименование товара:" Grid.Row="0" Grid.Column="0"/>
-        <TextBox x:Name="NameTextBox" Text="{Binding Name}" Grid.Row="0" Grid.Column="1"/>
+        <TextBox x:Name="NameTextBox" Text="{Binding ItemName}" Grid.Row="0" Grid.Column="1"/>
 
         <Label Content="Категория товара:" Grid.Row="1" Grid.Column="0"/>
         <ComboBox x:Name="CategoryComboBox" Grid.Row="1" Grid.Column="1"
@@ -42,7 +42,7 @@
               SelectedValue="{Binding CategoryId}"/>
 
         <Label Content="Описание товара:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Margin="0,8,10,5"/>
-        <TextBox x:Name="DescriptionTextBox" Text="{Binding Description}" Grid.Row="2" Grid.Column="1"
+        <TextBox x:Name="DescriptionTextBox" Text="{Binding ItemDescription}" Grid.Row="2" Grid.Column="1"
              Height="60" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Stretch"/>
 
         <Label Content="Производитель:" Grid.Row="3" Grid.Column="0"/>

@@ -24,6 +24,19 @@ namespace velosipedi
         public EditorWindow()
         {
             InitializeComponent();
+            _isEdit = false;
+            _item = new Item();
+            IdLabel.Visibility = Visibility.Collapsed;
+            IdTextBox.Visibility = Visibility.Collapsed;
+            this.DataContext = _item;
+        }
+
+        public EditorWindow(Item item)
+        {
+            InitializeComponent();
+            _isEdit = true;
+            _item = item;
+            this.DataContext = _item;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -33,7 +46,7 @@ namespace velosipedi
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void ImageButton_Click(object sender, RoutedEventArgs e)
