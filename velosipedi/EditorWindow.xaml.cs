@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,6 +23,7 @@ namespace velosipedi
         private bool _isEdit = false;
         private Item? _item;
         private User? _user;
+        private string? _img;
             
         public EditorWindow(User user)
         {
@@ -41,6 +43,7 @@ namespace velosipedi
             _isEdit = true;
             _item = item;
             _user = user;
+            _img = item.ImagePath;
             this.DataContext = _item;
             FillComboBox();
         }
@@ -104,6 +107,8 @@ namespace velosipedi
                     _item.CurrentDiscount = discount;
                     _item.Unit = "шт.";
 
+                    //TODO _item.ImagePath = _img;
+
                     if (_isEdit)
                     {
                         context.Entry(_item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -138,7 +143,18 @@ namespace velosipedi
 
         private void ImageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Изображения| *.jpg;*.jpeg;*.png";
+            dialog.CheckPathExists = true;
+            if (dialog.ShowDialog() == true)
+            {
+                BitmapImage image = new BitmapImage(new Uri(dialog.FileName));
+                if (image.PixelWidth > 300 || image.PixelHeight > 200)
+                {
+                    MessageBox.Show($"Изображение должно быть меньше 300х200 пикселей", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                //TODO копировать изображение, заменить PreviewImage.Source, проверить ошибки доступа
+            }
         }
     }
 }

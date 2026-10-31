@@ -67,7 +67,7 @@
         <TextBox x:Name="DiscountTextBox" Text="{Binding CurrentDiscount}" Grid.Row="7" Grid.Column="1"/>
 
         <Button Content="Выбрать изображение" x:Name="ImageButton" Click="ImageButton_Click" Grid.Row="9"/>
-        <Image x:Name="PreviewImage"/>
+        <Image x:Name="PreviewImage" Source="{Binding ImagePath}"/>
 
         <Button Grid.Row="11" x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click"  Width="100" Height="30" Margin="0,0,10,0" IsDefault="True"/>
 
