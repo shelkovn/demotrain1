@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:velosipedi"
         mc:Ignorable="d"
-        Title="Редактирование товара" Height="450" Width="400">
+        Title="Редактирование товара" Height="550" Width="400">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -21,9 +21,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="100px" />
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Label x:Name="IdLabel" Content="ID:" Grid.Row="10" Grid.Column="0"/>
@@ -66,8 +66,8 @@
         <Label Content="Действующая скидка (%):" Grid.Row="7" Grid.Column="0"/>
         <TextBox x:Name="DiscountTextBox" Text="{Binding CurrentDiscount}" Grid.Row="7" Grid.Column="1"/>
 
-        <Button Content="Выбрать изображение" x:Name="ImageButton" Click="ImageButton_Click" Grid.Row="9"/>
-        <Image x:Name="PreviewImage" Source="{Binding ImagePath}"/>
+        <Button Content="Выбрать изображение" Height="50px" x:Name="ImageButton" Click="ImageButton_Click" Grid.Row="9"/>
+        <Image Grid.Row="9" Grid.Column="1" x:Name="PreviewImage" Source="{Binding ImagePath}"/>
 
         <Button Grid.Row="11" x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click"  Width="100" Height="30" Margin="0,0,10,0" IsDefault="True"/>
 

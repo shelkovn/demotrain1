@@ -34,6 +34,7 @@ namespace velosipedi
             IdLabel.Visibility = Visibility.Collapsed;
             IdTextBox.Visibility = Visibility.Collapsed;
             this.DataContext = _item;
+            PreviewImage.Source = new BitmapImage(new Uri("/Pictures/picture.png", UriKind.Relative));
             FillComboBox();
         }
 
@@ -45,6 +46,21 @@ namespace velosipedi
             _user = user;
             _img = item.ImagePath;
             this.DataContext = _item;
+            if (!string.IsNullOrEmpty(_item.ImagePath))
+            {
+                try
+                {
+                    PreviewImage.Source = new BitmapImage(new Uri($"/Pictures/{_item.ImagePath}", UriKind.RelativeOrAbsolute));
+                }
+                catch
+                {
+                    PreviewImage.Source = new BitmapImage(new Uri("/Pictures/picture.png", UriKind.Relative));
+                }
+            }
+            else
+            {
+                PreviewImage.Source = new BitmapImage(new Uri("/Pictures/picture.png", UriKind.Relative));
+            }
             FillComboBox();
         }
 
@@ -143,18 +159,27 @@ namespace velosipedi
 
         private void ImageButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Изображения| *.jpg;*.jpeg;*.png";
-            dialog.CheckPathExists = true;
-            if (dialog.ShowDialog() == true)
+            try
             {
-                BitmapImage image = new BitmapImage(new Uri(dialog.FileName));
-                if (image.PixelWidth > 300 || image.PixelHeight > 200)
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Изображения| *.jpg;*.jpeg;*.png";
+                dialog.CheckPathExists = true;
+                if (dialog.ShowDialog() == true)
                 {
-                    MessageBox.Show($"Изображение должно быть меньше 300х200 пикселей", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    BitmapImage image = new BitmapImage(new Uri(dialog.FileName));
+                    if (image.PixelWidth > 300 || image.PixelHeight > 200)
+                    {
+                        MessageBox.Show($"Изображение должно быть меньше 300х200 пикселей", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    //TODO копировать изображение, заменить PreviewImage.Source, проверить ошибки доступа
+                    PreviewImage.Source = image;
                 }
-                //TODO копировать изображение, заменить PreviewImage.Source, проверить ошибки доступа
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошбика при получении изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
     }
 }
