@@ -38,6 +38,8 @@ public partial class AppContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=DBSRV\\OV2025;Initial Catalog=shelkovn_de_lab5;Integrated Security=True;Trust Server Certificate=True");
+                                    // home "Data Source=DESKTOP-L229MBG\\SQLEXPRESS;Initial Catalog=lab5;Integrated Security=True;Trust Server Certificate=True"
+                                    //college "Data Source=DBSRV\\OV2025;Initial Catalog=shelkovn_de_lab5;Integrated Security=True;Trust Server Certificate=True"
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

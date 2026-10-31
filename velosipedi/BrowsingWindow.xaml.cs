@@ -174,7 +174,7 @@ namespace velosipedi
             }
             else
             {
-                EditorWindow window = new EditorWindow(_selectedItem);
+                EditorWindow window = new EditorWindow(_user, _selectedItem);
                 window.Show();
                 this.Close();
             }

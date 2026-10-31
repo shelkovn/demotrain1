@@ -52,7 +52,7 @@
               SelectedValue="{Binding ManufacturerId}"/>
 
         <Label Content="Поставщик:" Grid.Row="4" Grid.Column="0"/>
-        <ComboBox x:Name="ProviderComboBox" Grid.Row="4" Grid.Column="1"
+        <ComboBox x:Name="DealerComboBox" Grid.Row="4" Grid.Column="1"
               DisplayMemberPath="DealerName" 
               SelectedValuePath="DealerId"
               SelectedValue="{Binding DealerId}"/>
