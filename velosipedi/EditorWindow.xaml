@@ -27,10 +27,10 @@
         </Grid.RowDefinitions>
 
         <Label x:Name="IdLabel" Content="ID:" Grid.Row="10" Grid.Column="0"/>
-        <TextBox x:Name="IdTextBox" Text="{Binding Article}" Grid.Row="10" Grid.Column="1" IsReadOnly="True"/>
+        <TextBox x:Name="IdTextBox" Text="{Binding ItemId}" Grid.Row="10" Grid.Column="1" IsReadOnly="True"/>
         
         <Label x:Name="ArticleLabel" Content="Артикул:" Grid.Row="8" Grid.Column="0"/>
-        <TextBox x:Name="ArticleTextBox" Text="{Binding Article}" Grid.Row="8" Grid.Column="1"/>
+        <TextBox x:Name="ArticleTextBox" Text="{Binding ItemArticle}" Grid.Row="8" Grid.Column="1"/>
 
         <Label Content="Наименование товара:" Grid.Row="0" Grid.Column="0"/>
         <TextBox x:Name="NameTextBox" Text="{Binding ItemName}" Grid.Row="0" Grid.Column="1"/>
@@ -48,7 +48,7 @@
         <Label Content="Производитель:" Grid.Row="3" Grid.Column="0"/>
         <ComboBox x:Name="ManufacturerComboBox" Grid.Row="3" Grid.Column="1"
               DisplayMemberPath="ManufacturerName" 
-              SelectedValuePath="DealerId"
+              SelectedValuePath="ManufacturerId"
               SelectedValue="{Binding ManufacturerId}"/>
 
         <Label Content="Поставщик:" Grid.Row="4" Grid.Column="0"/>
