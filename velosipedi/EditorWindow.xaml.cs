@@ -1,7 +1,9 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +26,7 @@ namespace velosipedi
         private Item? _item;
         private User? _user;
         private string? _img;
+        private string? _oldimg;
             
         public EditorWindow(User user)
         {
@@ -44,7 +47,7 @@ namespace velosipedi
             _isEdit = true;
             _item = item;
             _user = user;
-            _img = item.ImagePath;
+            _oldimg = item.ImagePath;
             this.DataContext = _item;
             if (!string.IsNullOrEmpty(_item.ImagePath))
             {
@@ -125,6 +128,7 @@ namespace velosipedi
 
                     //TODO _item.ImagePath = _img;
 
+
                     if (_isEdit)
                     {
                         context.Entry(_item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -134,6 +138,43 @@ namespace velosipedi
                         int maxId = context.Items.ToList().Count();
                         _item.ItemId = maxId + 1;
                         context.Items.Add(_item);
+                    }
+
+
+                    if (_img != null)
+                    {
+                        if (_oldimg != null)
+                        {
+                            //TODO delete old file
+                        }
+                        string filename = $"{_item.ItemId}_{DateTime.Now.ToString().Replace('.', '_').Replace(':', '_').Replace(' ', '_')}";
+                        string extension = System.IO.Path.GetExtension(_img);
+                        string directory = System.IO.Path.GetDirectoryName(_img);
+                        string path = System.IO.Path.Combine(directory, filename + extension);
+
+                        _item.ImagePath = $"{filename + extension}";
+                        File.Copy(_img, path, true);
+
+                        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                        string targetDirectory = "";
+
+                        if (baseDirectory.Contains(@"\bin\"))
+                        {
+                            DirectoryInfo projectDir = Directory.GetParent(baseDirectory).Parent.Parent.Parent;
+
+                            if (projectDir != null)
+                            {
+                                targetDirectory = System.IO.Path.Combine(projectDir.FullName, "Pictures");
+                            }
+                        }
+                        else
+                        {
+                            targetDirectory = System.IO.Path.Combine(baseDirectory, "Pictures");
+                        }
+
+                        if (!Directory.Exists(targetDirectory)) Directory.CreateDirectory(targetDirectory);
+
+                        File.Move(path, System.IO.Path.Combine(targetDirectory, filename + extension), true);
                     }
 
                     context.SaveChanges();
@@ -166,12 +207,21 @@ namespace velosipedi
                 dialog.CheckPathExists = true;
                 if (dialog.ShowDialog() == true)
                 {
-                    BitmapImage image = new BitmapImage(new Uri(dialog.FileName));
+                    BitmapImage image = new BitmapImage();
+                    using (var stream = new FileStream(dialog.FileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.StreamSource = stream;
+                        image.EndInit();
+                    }
+                    image.Freeze();
                     if (image.PixelWidth > 300 || image.PixelHeight > 200)
                     {
                         MessageBox.Show($"Изображение должно быть меньше 300х200 пикселей", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
-                    //TODO копировать изображение, заменить PreviewImage.Source, проверить ошибки доступа
+                    _img = dialog.FileName;
                     PreviewImage.Source = image;
                 }
             }
