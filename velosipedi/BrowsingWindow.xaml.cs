@@ -35,6 +35,20 @@ namespace velosipedi
             InitializeComponent();
             _user = user;
             RefreshList();
+
+            if (_user != null)
+            {
+                switch (_user.RoleId)
+                {
+                    case 2:
+                        EditorPanel.Visibility = Visibility.Collapsed; 
+                        break;
+                    case 3:
+                        EditorPanel.Visibility = Visibility.Collapsed;
+                        SearchbarPanel.Visibility = Visibility.Collapsed;
+                        break;
+                }
+            }
         }
 
         public void RefreshList()
