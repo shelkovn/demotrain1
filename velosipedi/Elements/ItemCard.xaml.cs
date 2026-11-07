@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,9 +58,29 @@ namespace velosipedi.Elements
                 {
                     try
                     {
-                        ItemImage.Source = new BitmapImage(new Uri($"/Pictures/{p.ImagePath}", UriKind.RelativeOrAbsolute));
+                        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                        string targetDirectory;
+                        if (baseDirectory.Contains(@"\bin\"))
+                        {
+                            DirectoryInfo projectDir = Directory.GetParent(baseDirectory).Parent.Parent.Parent;
+                            targetDirectory = System.IO.Path.Combine(projectDir.FullName, "Pictures", p.ImagePath);
+                        }
+                        else
+                        {
+                            targetDirectory = System.IO.Path.Combine(baseDirectory, "Pictures", p.ImagePath);
+                        }
+                        BitmapImage image = new BitmapImage();
+                        using (var stream = new FileStream(targetDirectory, FileMode.Open, FileAccess.Read, FileShare.Read))
+                        {
+                            image.BeginInit();
+                            image.CacheOption = BitmapCacheOption.OnLoad;
+                            image.StreamSource = stream;
+                            image.EndInit();
+                        }
+                        image.Freeze();
+                        ItemImage.Source = image;
                     }
-                    catch
+                    catch (Exception ex)
                     {
                         ItemImage.Source = new BitmapImage(new Uri("/Pictures/picture.png", UriKind.Relative));
                     }
