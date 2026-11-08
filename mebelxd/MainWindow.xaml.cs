@@ -20,5 +20,15 @@ namespace mebelxd
         {
             InitializeComponent();
         }
+
+        private void AuthButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GuestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:mebelxd"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type Control}">
+            <Setter Property="FontFamily" Value="Calibri" />
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Calibri" />
+        </Style>
+
     </Application.Resources>
 </Application>
