@@ -221,7 +221,9 @@ namespace velosipedi
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            EditorWindow window = new EditorWindow(_user);
+            window.Show();
+            this.Close();
         }
 
         private void ItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
