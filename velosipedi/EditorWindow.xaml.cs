@@ -126,8 +126,6 @@ namespace velosipedi
                     _item.CurrentDiscount = discount;
                     _item.Unit = "шт.";
 
-                    //TODO _item.ImagePath = _img;
-
 
                     if (_isEdit)
                     {
@@ -143,10 +141,6 @@ namespace velosipedi
 
                     if (_img != null)
                     {
-                        if (_oldimg != null)
-                        {
-                            //TODO delete old file
-                        }
                         string filename = $"{_item.ItemId}_{DateTime.Now.ToString().Replace('.', '_').Replace(':', '_').Replace(' ', '_')}";
                         string extension = System.IO.Path.GetExtension(_img);
                         string directory = System.IO.Path.GetDirectoryName(_img);
@@ -175,6 +169,22 @@ namespace velosipedi
                         if (!Directory.Exists(targetDirectory)) Directory.CreateDirectory(targetDirectory);
 
                         File.Move(path, System.IO.Path.Combine(targetDirectory, filename + extension), true);
+
+                        if (_oldimg != null)
+                        {
+                            string oldfilepath = System.IO.Path.Combine(targetDirectory, _oldimg);
+                            if (File.Exists(oldfilepath))
+                            {
+                                try
+                                {
+                                    File.Delete(oldfilepath);
+                                }
+                                catch (Exception ex)
+                                {
+                                    //TODO messagebox? 
+                                }
+                            }
+                        }
                     }
 
                     context.SaveChanges();
