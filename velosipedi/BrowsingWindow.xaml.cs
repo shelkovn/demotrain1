@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.InteropServices.Swift;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,12 +41,17 @@ namespace velosipedi
             {
                 switch (_user.RoleId)
                 {
+                    case 1:
+                        Title = Title + " - администратор";
+                        break;
                     case 2:
-                        EditorPanel.Visibility = Visibility.Collapsed; 
+                        EditorPanel.Visibility = Visibility.Collapsed;
+                        Title = Title + " - менеджер";
                         break;
                     case 3:
                         EditorPanel.Visibility = Visibility.Collapsed;
                         SearchbarPanel.Visibility = Visibility.Collapsed;
+                        Title = Title + " - покупатель";
                         break;
                 }
             }
@@ -244,6 +250,13 @@ namespace velosipedi
         {
             _selectedItem = e.AddedItems?[0] as Item ?? null;
             SelectionLabel.Content = _selectedItem?.Category.CategoryName ?? "Не выбрано";
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
         }
     }
 }
